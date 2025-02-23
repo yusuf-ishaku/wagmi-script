@@ -35,7 +35,7 @@ for (let i = 0; i < numWorkers; i++) {
       }
     } else if (message.incrementCounter) {
       addressesGenerated++;
-      console.log("Addresses Generated:", addressesGenerated);
+      // console.log("Addresses Generated:", addressesGenerated);
     }
   });
 }
