@@ -1,0 +1,38 @@
+{
+  "name": "y",
+  "version": "1.0.0",
+  "description": "yy",
+  "main": "y",
+  "scripts": {
+    "test": "",
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "y"
+  },
+  "keywords": [
+    "y"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@solana/web3.js": "^1.98.0",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "mysql2": "^3.12.0",
+    "node-cron": "^3.0.3",
+    "pm2": "^5.4.3",
+    "sequelize": "^6.37.5",
+    "socket.io": "^4.8.1",
+    "tunnel-ssh": "^5.2.0",
+    "ws": "^8.18.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.20.0",
+    "@types/ws": "^8.5.14",
+    "eslint": "^9.20.1",
+    "globals": "^15.15.0",
+    "nodemon": "^3.1.9"
+  }
+}
