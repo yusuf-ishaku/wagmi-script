@@ -18,6 +18,7 @@ for (let i = 0; i < numWorkers; i++) {
     if (message.keypair ) {
       if (addressesFound < 21) {
         console.log(addressesFound);
+        console.log(addressesFoundArray);
         // console.log("Address found!");
         // console.log("Public Key:", message.keypair.publicKey);
         // console.log("Secret Key:", message.keypair.secretKey);
