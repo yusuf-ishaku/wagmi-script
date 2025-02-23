@@ -16,6 +16,7 @@ for (let i = 0; i < numWorkers; i++) {
   workers.push(worker);
   worker.on("message", (message) => {
     if (message.keypair ) {
+      console.log(i);
       if (addressesFound < 21) {
         console.log(addressesFound);
         console.log(addressesFoundArray);
