@@ -15,17 +15,19 @@ for (let i = 0; i < numWorkers; i++) {
   });
   workers.push(worker);
   worker.on("message", (message) => {
-    if (message.keypair) {
+    if (message.keypair ) {
       if (addressesFound < 21) {
-        console.log("Address found!");
-        console.log("Public Key:", message.keypair.publicKey);
-        console.log("Secret Key:", message.keypair.secretKey);
-        console.log("Addresses Checked:", addressesGenerated);
+        console.log(addressesFound);
+        // console.log("Address found!");
+        // console.log("Public Key:", message.keypair.publicKey);
+        // console.log("Secret Key:", message.keypair.secretKey);
+        // console.log("Addresses Checked:", addressesGenerated);
         addressesFoundArray.push({
           publicKey: message.keypair.publicKey,
           secretKey: message.keypair.secretKey,
         });
         addressesFound++;
+        addressesGenerated++;
       } else {
         // Terminate all workers once the address is found.
         console.log(addressesFoundArray);

@@ -10,7 +10,6 @@ const isValidVanityAddress = (address, suffix, caseSensitive) => {
   const addressToCheck = caseSensitive ? address : address.toLowerCase();
   //   const prefixToCheck = caseSensitive ? prefix : prefix.toLowerCase()
   const suffixToCheck = caseSensitive ? suffix : suffix.toLowerCase();
-  console.log(addressToCheck);
   return addressToCheck.endsWith(suffixToCheck);
 };
 
@@ -30,7 +29,6 @@ const generateVanityAddress = (suffix, caseSensitive, incrementCounter) => {
     incrementCounter();
     keypair = Keypair.generate();
   }
-
   return keypair;
 };
 
