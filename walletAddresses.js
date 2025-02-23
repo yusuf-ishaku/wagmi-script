@@ -16,6 +16,10 @@ const mint_keys = sequelize.define("mint_keys", {
     type: DataTypes.STRING,
     allowNull: false,
   },
+  status: {
+    type: DataTypes.STRING,
+    allowNull: false
+  }
 });
 
 // Sync the model with the database

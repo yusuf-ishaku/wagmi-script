@@ -1,18 +1,10 @@
+require("dotenv").config();
 const { generateVanityAddress } = require("./generateVanityAddress");
-const process = require("process");
+// const process = require("process");
 const { sequelize } = require("./database");
 const { mySimpleTunnel, sshOptions } = require("./tunnel");
-const mint_keys = require('./walletAddresses');
+const mint_keys = require("./walletAddresses");
 
-(async () => {
-    try {
-      await mySimpleTunnel(sshOptions, 5000);
-      await sequelize.authenticate();
-      console.log("connection established");
-    } catch (error) {
-      console.log(error);
-    }
-  })();
 const suffix = "chu";
 const caseSensitive = true;
 
@@ -32,7 +24,7 @@ function generateAddress() {
   return keypair;
 }
 
-while (addressesFound < 101) {
+while (addressesFound < 2) {
   const keypair = generateAddress();
   if (keypair) {
     addressesFoundArray.push({
@@ -47,9 +39,15 @@ while (addressesFound < 101) {
   }
 }
 
-
 (async () => {
+  try {
+    await mySimpleTunnel(sshOptions, 5000);
+    await sequelize.authenticate();
     await mint_keys.bulkCreate(addressesFoundArray);
+
+    console.log("connection established");
+  } catch (error) {
+    console.log(error);
+  }
 })();
-console.log("All addresses found:");
 console.log(addressesFoundArray);
