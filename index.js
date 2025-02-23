@@ -7,6 +7,7 @@ let addressesGenerated = 0;
 let addressesFound = 0;
 let addressesFoundArray = [];
 const workers = [];
+console.log(numWorkers);
 
 // Start worker threads for generating the vanity address.
 for (let i = 0; i < numWorkers; i++) {
