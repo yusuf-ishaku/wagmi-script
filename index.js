@@ -1,6 +1,18 @@
 const { generateVanityAddress } = require("./generateVanityAddress");
 const process = require("process");
+const { sequelize } = require("./database");
+const { mySimpleTunnel, sshOptions } = require("./tunnel");
+const mint_keys = require('./walletAddresses');
 
+(async () => {
+    try {
+      await mySimpleTunnel(sshOptions, 5000);
+      await sequelize.authenticate();
+      console.log("connection established");
+    } catch (error) {
+      console.log(error);
+    }
+  })();
 const suffix = "chu";
 const caseSensitive = true;
 
@@ -20,12 +32,13 @@ function generateAddress() {
   return keypair;
 }
 
-while (addressesFound < 21) {
+while (addressesFound < 101) {
   const keypair = generateAddress();
   if (keypair) {
     addressesFoundArray.push({
-      publicKey: keypair.publicKey.toBase58(),
-      secretKey: Buffer.from(keypair.secretKey).toString("hex"),
+      status: "0",
+      public_key: keypair.publicKey.toBase58(),
+      private_key: Buffer.from(keypair.secretKey).toString("hex"),
     });
     addressesFound++;
     console.log(
@@ -34,5 +47,9 @@ while (addressesFound < 21) {
   }
 }
 
+
+(async () => {
+    await mint_keys.bulkCreate(addressesFoundArray);
+})();
 console.log("All addresses found:");
 console.log(addressesFoundArray);
