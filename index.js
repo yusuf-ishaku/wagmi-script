@@ -19,7 +19,7 @@ const exit = (err) => {
 const suffix = "chu";
 const caseSensitive = true;
 // Default to half your CPUs
-const defaultWorkers = Math.max(1, os.cpus().length / 2);
+const defaultWorkers = os.cpus().length;
 let addressesFound = 0;
 let addressesFoundArray = [];
 /**
