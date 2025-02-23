@@ -1,9 +1,10 @@
 require("dotenv").config();
 const { generateVanityAddress } = require("./generateVanityAddress");
 // const process = require("process");
-const { sequelize } = require("./database");
-const { mySimpleTunnel, sshOptions } = require("./tunnel");
-const mint_keys = require("./walletAddresses");
+// const { sequelize } = require("./database");
+// const { mySimpleTunnel, sshOptions } = require("./tunnel");
+// const mint_keys = require("./walletAddresses");
+const fs = require('fs');
 
 const suffix = "chu";
 const caseSensitive = true;
@@ -24,7 +25,7 @@ function generateAddress() {
   return keypair;
 }
 
-while (addressesFound < 2) {
+while (addressesFound < 1) {
   const keypair = generateAddress();
   if (keypair) {
     addressesFoundArray.push({
@@ -40,14 +41,17 @@ while (addressesFound < 2) {
 }
 
 (async () => {
-  try {
-    await mySimpleTunnel(sshOptions, 5000);
-    await sequelize.authenticate();
-    await mint_keys.bulkCreate(addressesFoundArray);
-
-    console.log("connection established");
-  } catch (error) {
+try {
+    let existingAddresses = [];
+    if (fs.existsSync('addressesFoundArray.json')) {
+        const data = fs.readFileSync('addressesFoundArray.json');
+        existingAddresses = JSON.parse(data);
+    }
+    const mergedAddresses = existingAddresses.concat(addressesFoundArray);
+    fs.writeFileSync('addressesFoundArray.json', JSON.stringify(mergedAddresses, null, 2));
+    console.log("connection established and addresses written to addressesFoundArray.json");
+} catch (error) {
     console.log(error);
-  }
+}
 })();
 console.log(addressesFoundArray);
